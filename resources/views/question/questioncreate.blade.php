@@ -8,32 +8,31 @@
 {{Form::open(["route"=>["questions.store",$topic], "id"=>"form"])}}
 <div id="divider0"><hr/></div>
 <div id="practice"></div>
-{{Form::submit("Subir Pregunta")}}
+{{Form::submit("Subir Pregunta",["id"=>"btsubmit"])}}
+{{Form::hidden("question_type")}}
 {{Form::close()}}
 <script type="text/javascript">
             var numberofforms=0;
             var number=0;
+            var questiontype;
             $(document).ready(function(){
                 //invisilbe btadd
                 $("#btadd").hide();
                 $("#divider0").hide();
+                $("#btsubmit").click(
+                    function(){
+                        let x=$("#selecttype").find(":selected").val();
+                        $("[name='question_type']").val(x);
+                    }
+                    );
                 $("#btcreate").on("click",crear);
                 function crear(){
                 $("#btcreate").text("Cambiar");
                  let x=$("#selecttype").find(":selected").val();
-                 seriada=0;
-                 console.log("selected"+x);
-                 console.log(x==1);
-                 if(x==1){
-                    seriada=1;
-                 }else{
-                    seriada=0;
-                 }
                     $("#divider0").show();
-                    $("#practice").load("{{route("questions.load")}}"+"?type="+x+"&topic="+{{$topic}}+"&number="+number+"&seriada="+seriada);
+                    $("#practice").load("{{route("questions.load")}}"+"?type="+x+"&topic="+{{$topic}}+"&number="+number+"&seriada=0");
                     jQuery("<hr>").appendTo($("#practie"));
                 }
-
                 });
 </script>
 @endsection

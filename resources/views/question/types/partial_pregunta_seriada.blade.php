@@ -1,8 +1,8 @@
-
-        <div id="form_0" class="form-group">
-            {{Form::label("name_".$number,"*Pregunta*:",["style"=>"width:100%; float:left"])}}
-            {{Form::text("name_".$number,null,["class"=>"form-control", "style"=>"float:left; width:100%"])}}
-        </div>
+        {{$seriada}}
+        @include("question.types.auxiliary.partial_physical_examination")
+        <!--SOLO PARA QUE SE TOME UN NAME-->
+        {{Form::hidden("name_0")}}
+            <!-- AQUI VAMOS A AGREGAR LAS DEFINICIONES DEL CASO: SIGNOS VITALES, SINTOMAS FÍSICOS, ESTUDIOS DE LABORATORIO ETC, ETC ETC -->
         <div id="divextraforms">
         </div>
            {{Form::select("selectype2",$types,2,["class"=>"form-control", "id"=>"selectype2"])}}

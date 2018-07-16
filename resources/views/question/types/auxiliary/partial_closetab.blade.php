@@ -1,7 +1,7 @@
 		<div id="divclose_{{$number}}">
 			@if($seriada)
 				<i class="fa fa-times" id="btncloseform_{{$number}}"></i>
-				@endif
+			@endif
 		</div>
 		<script type="text/javascript">
             $(document).ready(

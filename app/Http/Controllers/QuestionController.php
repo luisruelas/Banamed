@@ -43,7 +43,8 @@ class QuestionController extends Controller
      */
     public function store(Request $request,$topic)
     {
-        dd($request->toArray());
+        $ordered_array=($this->order_array($request->toArray()));
+        dd($ordered_array);
         $spacer=";&";
         $topic=Topic::where("id",$topic)->first();
         $answers=$request["answer"].$spacer.$request["option1"].$spacer.$request["option2"].$spacer.$request["option3"];
@@ -112,7 +113,7 @@ class QuestionController extends Controller
         //seriada
         if($type==1){
             $types=TypeOfQuestion::where("id","!=",1)->get()->pluck("name","id")->toArray();
-            return view('question.types.partial_pregunta_seriada')->with(["topic"=>$topic,"type"=>$type, "number"=>$number, "types"=>$types]);
+            return view('question.types.partial_pregunta_seriada')->with(["topic"=>$topic,"type"=>$type, "number"=>$number, "types"=>$types, "seriada"=>$seriada]);
         }
         //opción múltiple
         if($type==2){
@@ -127,5 +128,36 @@ class QuestionController extends Controller
         return view("question.types.partial_pregunta_abierta")->with(["topic"=>$topic,"type"=>$type, "number"=>$number, "seriada"=>$seriada]);    
         }
         
+    }
+    public function order_array($array){
+        unset($array["_token"]);
+        $arraykeys=array_keys($array);
+        $formnumbers=array();
+        $ordered_array_keys=array();
+        foreach($arraykeys as $key){
+            if(strpos($key, "name")!==false){
+               $formnumbers[]=explode("_",$key)[1];
+            }
+        }
+        //agregar las keys en orden
+        foreach ($formnumbers as $number) {
+            $arrayquestionkeys=array();
+            //crear un array para guardar las keys de cada pregunta
+            foreach($arraykeys as $key){
+                //añadira al array de la pregunta solo si el elemento es de esa pregunta
+                $keynumber=explode("_", $key);
+                if(sizeof($keynumber)>=2){
+                    $keynumber=$keynumber[1];
+                    if($keynumber==$number){
+                    $arrayquestionkeys[]=$key;
+                    }
+                }
+
+            }
+            $ordered_array_keys[]=$arrayquestionkeys;
+        }
+        //
+        return ($ordered_array_keys);
+
     }
 }

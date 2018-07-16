@@ -1,4 +1,5 @@
         @include("question.types.auxiliary.partial_closetab")
+        @include("question.types.auxiliary.partial_physical_examination")
         <div class="form-group">
             {{Form::label("name_".$number,"*Pregunta*:",["style"=>"width:100%; float:left"])}}
             {{Form::text("name_".$number,null,["class"=>"form-control", "style"=>"float:left; width:100%"])}}
@@ -17,8 +18,8 @@
         </div>
         <div id='{{"divextraoption_".$number}}'>
         </div>
-    <div>
-		<button class="btn btn-primary" type="button" id='{{"btaddoption_".$number}}'>Añadir Opción</button>
+    <div id="identifier" style="width:100%" class="form-group">
+		<button class="btn btn-primary" type="button" id='{{"btaddoption_".$number}}' style="">Añadir Opción</button>
 	</div>
 		<script type="text/javascript">
             $(document).ready(function(){
