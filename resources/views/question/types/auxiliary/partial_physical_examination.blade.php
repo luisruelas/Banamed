@@ -1,16 +1,23 @@
 @if($seriada==0)
 <div id="physicalexamination_{{$number}}">
 	{{Form::label("physicalexamination_".$number, "Caso clínico")}}
-	{{Form::text("physicalexamination_".$number,"",["class"=>"form-control"])}}
+	{{Form::text("physicalexamination_".$number,"",["class"=>"form-control", "required"=>"true"])}}
 </div>
 	<h3 id="labstext_{{$number}}">Laboratorios<button type="button" id="btaddlabs_{{$number}}" class="btn btn-primary">Añadir Lab</button></h3>
 <div id="labs_{{$number}}">
+ </div>
 
-</div>
+ <h3 id="svtext_{{$number}}">Signos Vitales<button type="button" id="btaddsvs_{{$number}}" class="btn btn-primary">Añadir Signos</button></h3>
+<div id="divsvs_{{$number}}">
+
+ </div>
 <script type="text/javascript">
 	$(document).ready(
 		function(){
 			labsnumber=0;
+			$("#btaddsvs_"+{{$number}}).click(function(e){
+				$("#divsvs_"+e.target.id.split("_")[1]).load("{{route("questions.load")}}"+'?type=sv&number='+{{$number}});
+			});
 			$("#btaddlabs_{{$number}}").click(function(){
 				div=jQuery("<div>",{
 					id:"labs_{{$number}}_"+labsnumber

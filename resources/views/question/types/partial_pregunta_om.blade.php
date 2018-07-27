@@ -1,20 +1,22 @@
         @include("question.types.auxiliary.partial_closetab")
         @include("question.types.auxiliary.partial_physical_examination")
         <div class="form-group">
+        	{{Form::hidden("typeofquestionid_".$number,$type)}}
+            {{Form::hidden("topicid_".$number,$topic)}}
             {{Form::label("name_".$number,"*Pregunta*:",["style"=>"width:100%; float:left"])}}
-            {{Form::text("name_".$number,null,["class"=>"form-control", "style"=>"float:left; width:100%"])}}
+            {{Form::text("name_".$number,null,["class"=>"form-control", "style"=>"float:left; width:100%", "required"=>"true"])}}
         </div>
         <div class="form-group">
             {{Form::label("option_".$number."_0","*Respuesta*:",["style"=>"width:50%; float:left"])}}
             {{Form::label("explanation_".$number."_0","*Explicación*:",["style"=>"width:50%; float:left"])}}
-            {{Form::text("explanation_".$number."_0",null,["class"=>"form-control", "style"=>"float:left; width:50%"])}}
             {{Form::text("option_".$number."_0",null,["class"=>"form-control", "style"=>"float:left; width:50%"])}}
+            {{Form::text("explanation_".$number."_0",null,["class"=>"form-control", "style"=>"float:left; width:50%"])}}
         </div>
         <div class="form-group">
             {{Form::label("option_".$number."_1","*Opción",["style"=>"width:50%; float:left"])}}
             {{Form::label("explanation_".$number."_1","*Explicación*:",["style"=>"width:50%; float:left"])}}
-            {{Form::text("explanation_".$number."_1",null,["class"=>"form-control", "style"=>"float:left; width:50%"])}}
             {{Form::text("option_".$number."_1",null,["class"=>"form-control", "style"=>"float:left; width:50%"])}}
+                        {{Form::text("explanation_".$number."_1",null,["class"=>"form-control", "style"=>"float:left; width:50%"])}}
         </div>
         <div id='{{"divextraoption_".$number}}'>
         </div>

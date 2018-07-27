@@ -13,4 +13,9 @@ class DBinfo extends Model
         $version= $version['value'];
         return $version;
     }
+        public static function getNextVersion(){
+        $nextversion=DBinfo::where('name','nextversion')->first();
+        $nextversion= $version['value'];
+        return $nextversion;
+    }
 }

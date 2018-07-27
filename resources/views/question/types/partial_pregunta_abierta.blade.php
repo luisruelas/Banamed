@@ -1,5 +1,7 @@
         @include("question.types.auxiliary.partial_closetab")
         <div class="form-group">
+            {{Form::hidden("typeofquestionid_".$number,$type)}}
+            {{Form::hidden("topicid_".$number,$topic)}}
             {{Form::label("name_".$number,"*Pregunta*:",["style"=>"width:100%; float:left"])}}
             {{Form::text("name_".$number,null,["class"=>"form-control", "style"=>"float:left; width:100%"])}}
         </div>
